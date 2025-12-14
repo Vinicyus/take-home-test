@@ -1,0 +1,33 @@
+<div class="loan-container">
+  <h1>Loan Management System</h1>
+  
+  <div *ngIf="loading" class="loading">Loading...</div>
+  <div *ngIf="error" class="error">{{ error }}</div>
+  
+  <table *ngIf="!loading && !error" class="loan-table">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Applicant Name</th>
+        <th>Amount</th>
+        <th>Current Balance</th>
+        <th>Status</th>
+        <th>Created At</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let loan of loans">
+        <td>{{ loan.id }}</td>
+        <td>{{ loan.applicantName }}</td>
+        <td>{{ loan.amount | currency }}</td>
+        <td>{{ loan.currentBalance | currency }}</td>
+        <td>
+          <span [class]="'status status-' + loan.status">
+            {{ loan.status }}
+          </span>
+        </td>
+        <td>{{ loan.createdAt | date:'short' }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
